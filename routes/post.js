@@ -8,7 +8,7 @@ postRoute.get('/',async(req,res)=>{
     const decode = jwt.verify(token,"masai")
     
     try{
-        const posts = await PostModal.find().limit(3).skip()
+        const posts = await PostModal.find({userID:decode.id}).limit(3).skip()
         res.status(200).json({"posts":posts})
     }catch(err){
         res.status(400).json({ msg: "something went wrong" })
